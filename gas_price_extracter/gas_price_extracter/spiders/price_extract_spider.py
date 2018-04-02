@@ -43,9 +43,7 @@ class GasPriceExtractSpider(scrapy.Spider):
         else:
             #Proceed for monthly price extraction                
             table_data = response.xpath('//table[@width="675" and @cellpadding="2"]/tr')
-            for each_item in  table_data[1:]:
-                if each_item.xpath('td[@class="B4"]'):
-                    month_map = {
+            month_map = {
                             1: "Jan",
                             2: "Feb",
                             3: "Mar",
@@ -58,7 +56,9 @@ class GasPriceExtractSpider(scrapy.Spider):
                             10: "Oct",
                             11: "Nov",
                             12: "Dec"
-                    }
+            }
+            for each_item in  table_data[1:]:
+                if each_item.xpath('td[@class="B4"]'):
                     #Extract each column item from the row
                     column_data = [row_data.xpath('text()').extract_first() for row_data in each_item.xpath('td')]
                     
