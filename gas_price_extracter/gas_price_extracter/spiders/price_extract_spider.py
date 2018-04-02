@@ -16,11 +16,12 @@ class GasPriceExtractSpider(scrapy.Spider):
         category = next(category for category in DATA_CATEGORIES if category in response.url)
         print 'category ', category
         if category == "rngwhhdD":
+            #Proceed for daily price extraction
             table_data = response.xpath('//table[@summary="Henry Hub Natural Gas Spot Price (Dollars per Million Btu)"]/tr')
             for each_item in  table_data[1:]:
-                #Proceed for daily price extraction\#Iterate through each table row:
+                
+                #Iterate through each table row
                 if each_item.xpath('td[@class="B6"]'):
-
                     #Extract each column item from the row
                     column_data = [row_data.xpath('text()').extract_first() for row_data in each_item.xpath('td')]
                     
@@ -40,9 +41,9 @@ class GasPriceExtractSpider(scrapy.Spider):
                         yield item
 
         else:
+            #Proceed for monthly price extraction                
             table_data = response.xpath('//table[@width="675" and @cellpadding="2"]/tr')
             for each_item in  table_data[1:]:
-                #Proceed for monthly price extraction                
                 if each_item.xpath('td[@class="B4"]'):
                     month_map = {
                             1: "Jan",
