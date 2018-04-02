@@ -71,18 +71,4 @@ class GasPriceExtractSpider(scrapy.Spider):
                         yield item
 
             
-    
-    # def parse_data(self, column_data):
-        
-    #     week_of = column_data[0].strip()
-    #     matched = re.search(r'(\S+\s+\S+)-\s*(\S+)\s*to', week_of)
-    #     date_initials = matched.group(1) 
-    #     starting_day = int(matched.group(2))
-    #     for each_day_value in column_data[1:]:
-    #         item = GasPriceExtractItem()
-    #         item['date'] = "%s %s" % (date_initials, starting_day)
-    #         item['price'] = each_day_value
-    #         starting_day += 1
-            
-    #         return item
-    # 
+   
